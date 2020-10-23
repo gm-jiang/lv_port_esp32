@@ -8,7 +8,15 @@
 void disp_driver_init(void)
 {
 #if defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9341
+#if CONFIG_IDF_TARGET_ESP32 // TODO: SUPPORT ESP32-S2
     ili9341_init();
+#elif CONFIG_IDF_TARGET_ESP32S2
+    //TODO: add ili9341_init code for ESP32S2
+#elif CONFIG_IDF_TARGET_ESP32S3
+    //TODO: add ili9341_init code for ESP32S3
+#elif CONFIG_IDF_TARGET_ESP32C3
+    //TODO: add ili9341_init code for ESP32C3
+#endif
 #elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9481
     ili9481_init();
 #elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9488
@@ -40,6 +48,7 @@ void disp_driver_init(void)
 #endif
 }
 
+#if CONFIG_IDF_TARGET_ESP32
 void disp_driver_flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color_map)
 {
 #if defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9341
@@ -74,6 +83,7 @@ void disp_driver_flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t *
     uc8151d_lv_fb_flush(drv, area, color_map);
 #endif
 }
+#endif
 
 void disp_driver_rounder(lv_disp_drv_t * disp_drv, lv_area_t * area)
 {

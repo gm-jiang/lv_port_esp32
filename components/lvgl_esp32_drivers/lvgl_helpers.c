@@ -52,6 +52,7 @@ void lvgl_driver_init(void)
     ESP_LOGI(TAG, "Display hor size: %d, ver size: %d", LV_HOR_RES_MAX, LV_VER_RES_MAX);
     ESP_LOGI(TAG, "Display buffer size: %d", DISP_BUF_SIZE);
 
+#if CONFIG_IDF_TARGET_ESP32 // TODO: SUPPORT ESP32-S2
 #if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X)
     ESP_LOGI(TAG, "Initializing SPI master for FT81X");
 
@@ -154,6 +155,13 @@ void lvgl_driver_init(void)
     #endif
 #else
 #endif
+#elif CONFIG_IDF_TARGET_ESP32S2
+    //TODO: add lvgl_driver_init code for ESP32S2
+#elif CONFIG_IDF_TARGET_ESP32S3
+    //TODO: add lvgl_driver_init code for ESP32S3
+#elif CONFIG_IDF_TARGET_ESP32C3
+    //TODO: add lvgl_driver_init code for ESP32C3
+#endif
 }
 
 /* Config the i2c master
@@ -200,6 +208,7 @@ bool lvgl_spi_driver_init(int host,
     int dma_channel,
     int quadwp_pin, int quadhd_pin)
 {
+#if CONFIG_IDF_TARGET_ESP32 // TODO: SUPPORT ESP32-S2
     assert((SPI_HOST <= host) && (VSPI_HOST >= host));
 
     const char *spi_names[] = {
@@ -226,5 +235,15 @@ bool lvgl_spi_driver_init(int host,
     assert(ret == ESP_OK);
 
     return ESP_OK != ret;
+#elif CONFIG_IDF_TARGET_ESP32S2
+    //TODO: add lvgl_driver_init code for ESP32S2
+    return ESP_OK;
+#elif CONFIG_IDF_TARGET_ESP32S3
+    //TODO: add lvgl_driver_init code for ESP32S3
+    return ESP_OK;
+#elif CONFIG_IDF_TARGET_ESP32C3
+    //TODO: add lvgl_driver_init code for ESP32C3
+    return ESP_OK;
+#endif
 }
 
